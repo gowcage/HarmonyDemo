@@ -1,0 +1,5 @@
+{
+  "mylib": {
+    "source": "src/mock/library.mock.ets"
+  }
+}
