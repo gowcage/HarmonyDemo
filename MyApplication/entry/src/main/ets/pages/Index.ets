@@ -1,5 +1,5 @@
 import { add } from 'mylib'
-import { TabsDemo } from './TabsDemo';
+import { TabsDemo } from './tabs/TabsDemo';
 import { LengthMetrics, router } from '@kit.ArkUI';
 import hilog from '@ohos.hilog';
 import { AudioPickerDemo } from './audiopicker/AudioPickerDemo';
@@ -34,7 +34,7 @@ function reqPermissionsFromUser(permissions: Array<Permissions>, context: common
 @Entry
 @Component
 struct Index {
-  private arr: string[] = ["TabsDemo", "audiopicker/AudioPickerDemo","sidebar/SideBarDemo"]
+  private arr: string[] = ["tabs/TabsDemo", "audiopicker/AudioPickerDemo","sidebar/SideBarDemo"]
 
   aboutToAppear(): void {
     const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;

@@ -117,6 +117,11 @@ export struct TabsDemo {
             .alignItems(HorizontalAlign.Center)
             .backgroundColor('#ffb3a288')
           }.tabBar(this.subTabBuilder(0, 'SubTab 1'))
+          .gesture(
+            PanGesture({direction: PanDirection.Right, distance: 5}).onActionEnd(() => {
+
+            })
+          )
 
           TabContent() {
             Column() {
@@ -210,11 +215,19 @@ export struct TabsDemo {
     .barHeight(50)
     .animationDuration(250)
     .onChange((index: number) => {
+      hilog.debug(0, TAG, 'onChange: ' + index)
       // currentIndex控制TabContent显示页签
       // animateTo({ duration: 300 }, () => {
       this.currentIndex = index
+      this.controller.changeIndex(index)
       // })
     })
+    // .onAnimationStart((index,targetIdx) => {
+    //   hilog.debug(0, TAG, 'onAnimationStart ' + this.currentIndex + '  ' + targetIdx)
+      // animateTo({ duration: 300 }, () => {
+      //   this.currentIndex = targetIdx
+      // })
+    // })
     .width('100%')
     .height('100%')
     .backgroundColor('#F1F3F5')

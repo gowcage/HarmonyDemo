@@ -1,10 +1,11 @@
-import { fileUri, picker, fileIo as fs } from '@kit.CoreFileKit'
 import { common } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { JSON } from '@kit.ArkTS';
 import { activatePermission, persistPermission, PlayMusic } from './AudioPlayUtils';
 import hilog from '@ohos.hilog';
 import { router } from '@kit.ArkUI';
+import picker from '@ohos.file.picker';
+import { fileUri, fileIo as fs } from '@kit.CoreFileKit'
 
 let TAG = 'AudioPickerDemo:->'
 
@@ -29,10 +30,12 @@ export struct AudioPickerDemo {
       Button('Select Local Music').onClick(() => {
         let context = getContext(this) as common.Context; // 请确保getContext(this)返回结果为UIAbilityContext
         let audioPicker = new picker.DocumentViewPicker(context);
-        // options.multiAuthMode = true // need API 15
-        // options.mergeMode = MergeTypeMode.AUDIO // need API 15
-
-        audioPicker.select({ maxSelectNumber: 500, authMode: true, fileSuffixFilters: ['mp3', 'wav', 'ape', 'flac'] })
+        audioPicker.select({
+          maxSelectNumber: 500,
+          authMode: true/*, fileSuffixFilters: ['mp3', 'wav', 'ape', 'flac']*/,
+          multiAuthMode: true, // true才有全选按钮
+          mergeMode: picker.MergeTypeMode.AUDIO
+        })
           .then((res) => {
             hilog.debug(0, TAG, '--------------------------------------------------------')
             hilog.debug(0, TAG, 'get music success: uri: ' + JSON.stringify(res))
@@ -61,7 +64,6 @@ export struct AudioPickerDemo {
         // let js = decodeURIComponent(this.uri[0])
         // hilog.debug(0, TAG, 'decode uri: ' + js)
         let uri = this.uri[0]
-
         fs.open(uri).then((file) => {
           //   fs.open('file:/'+this.uri[0]).then((file) => {
           //   fs.open('file:/'+this.uri[1]).then((file) => {

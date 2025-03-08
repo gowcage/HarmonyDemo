@@ -7,16 +7,15 @@ let TAG = 'SideBarDemo: ->'
 @Component
 export struct SideBarDemo {
   private tabCtrl: TabsController = new TabsController()
-  @State sideBarWidth: number = 37
-  @State containerWidth: number = 50
+  @State sideBarWidth: number = 37 // todo: keypoint 4
+  @State containerWidth: number = 50 // todo: keypoint 4
   @State isShowSidebar: boolean = false
   @State curTabIndex: number = 0
 
   build() {
     SideBarContainer() {
 
-      // sidebar content
-      Column({ space: 20 }) {
+      Column({ space: 20 }) { // sidebar content
         Button('Btn 1').onClick(() => {
           promptAction.showToast({ message: '1111' })
         })
@@ -28,30 +27,30 @@ export struct SideBarDemo {
         })
       }.backgroundColor('#ffe2e2e2')
 
-      // container content
-      Column() {
+      Column() { // container content
         Tabs({ index: this.curTabIndex, controller: this.tabCtrl }) {
           TabContent() {
             Column().width('100%').height('100%').backgroundColor(Color.Green)
           }.tabBar('green')
-          .onGestureJudgeBegin((info, event) => {
+          .onGestureJudgeBegin((info, event) => { // todo: keypoint 1
             hilog.debug(0, '***gqz ->',
               `onGestureJudgeBegin: info: ${JSON.stringify(info)}  event: ${JSON.stringify(event)}`)
-            // todo: judge left/right pan gesture to return reject/continue
+            // judge left/right pan gesture to return reject/continue
             let e = event as PanGestureEvent
-            // if(event typeof PanGestureEvent){}
             let isHorizontal = Math.abs(e.velocityX) / Math.abs(e.velocityY) > 2
+
             if (isHorizontal && e.velocityX > 0) { // right
               hilog.debug(0, TAG, 'pan right')
               return GestureJudgeResult.CONTINUE
-            } else if (this.curTabIndex === 0 && this.isShowSidebar) {
+
+            } else if (this.curTabIndex === 0 && this.isShowSidebar) { // left
               hilog.debug(0, TAG, 'pan left')
               return GestureJudgeResult.CONTINUE
             }
 
             return GestureJudgeResult.REJECT
           })
-          .gesture(
+          .gesture( // todo: keypoint 2
             GestureGroup(
               GestureMode.Parallel,
               PanGesture({ direction: PanDirection.Left, distance: 5 }).onActionEnd(() => {
@@ -85,12 +84,12 @@ export struct SideBarDemo {
         })
 
       }
+      // .width(this.containerWidth + '%')
       .backgroundColor(Color.Yellow)
-      .justifyContent(FlexAlign.Start)
       .alignItems(HorizontalAlign.Start)
 
     }
-    .width("200%")
+    .width("200%") // todo: keypoint 3
     .sideBarWidth(this.sideBarWidth + '%')
     .divider({ color: Color.Gray, strokeWidth: 1 })
     .showSideBar(this.isShowSidebar)

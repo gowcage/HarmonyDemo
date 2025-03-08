@@ -1,7 +1,7 @@
 {
   "src": [
     "pages/Index",
-    "pages/TabsDemo",
+    "pages/tabs/TabsDemo",
     "pages/audiopicker/AudioPickerDemo",
     "pages/sidebar/SideBarDemo"
   ]
