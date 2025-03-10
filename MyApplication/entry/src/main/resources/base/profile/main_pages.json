@@ -3,6 +3,7 @@
     "pages/Index",
     "pages/tabs/TabsDemo",
     "pages/audiopicker/AudioPickerDemo",
-    "pages/sidebar/SideBarDemo"
+    "pages/sidebar/SideBarDemo",
+    "pages/other/OtherDemos"
   ]
 }
