@@ -1,7 +1,7 @@
 import hilog from "@ohos.hilog"
 import { promptAction } from "@kit.ArkUI"
 
-let TAG = 'SideBarDemo: ->'
+let TAG = 'SideBarDemo: gqz->'
 
 @Entry
 @Component

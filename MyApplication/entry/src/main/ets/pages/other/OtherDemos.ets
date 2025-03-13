@@ -1,8 +1,15 @@
+import { hilog } from "@kit.PerformanceAnalysisKit"
+
+let TAG = 'OtherDemos: gqz->'
+
 @Entry
 @Component
 export struct OtherDemos {
+   aboutToAppear(): void {
+   }
+
    build() {
-      Column({space: 20}) {
+      Column({ space: 20 }) {
          Row() {
             Text()
                .layoutWeight(1)
@@ -52,3 +59,4 @@ export struct OtherDemos {
       }
    }
 }
+

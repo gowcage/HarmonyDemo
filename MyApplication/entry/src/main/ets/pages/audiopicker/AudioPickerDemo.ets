@@ -7,7 +7,7 @@ import { router } from '@kit.ArkUI';
 import picker from '@ohos.file.picker';
 import { fileUri, fileIo as fs } from '@kit.CoreFileKit'
 
-let TAG = 'AudioPickerDemo:->'
+let TAG = 'AudioPickerDemo: gqz->'
 
 @Entry
 @Component

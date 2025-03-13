@@ -4,7 +4,7 @@ import hilog from '@ohos.hilog';
 import { JSON, taskpool } from '@kit.ArkTS';
 import { BusinessError, emitter } from '@kit.BasicServicesKit';
 
-let TAG = 'TabsDemo: -> '
+let TAG = 'TabsDemo: gqz->'
 
 export interface SharedAction {
    changeParentTabs: (index: number) => void
@@ -17,7 +17,7 @@ let innerEvent: emitter.InnerEvent = {
 // 定义一个@Concurrent任务，给taskpool执行
 @Concurrent
 function sendSetTabsControllerOffsetXEvent() {
-   let TAG = 'TabsDemo: ->'
+   let TAG = 'TabsDemo: gqz->'
    hilog.debug(0, TAG, 'send innerEvent')
    let innerEvent: emitter.InnerEvent = {
       eventId: 1

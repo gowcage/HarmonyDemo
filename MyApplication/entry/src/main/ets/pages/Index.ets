@@ -35,7 +35,7 @@ function reqPermissionsFromUser(permissions: Array<Permissions>, context: common
 @Component
 struct Index {
    private arr: string[] =
-      ["tabs/TabsDemo", "tabs/TabsDemo2", "audiopicker/AudioPickerDemo", "sidebar/SideBarDemo", 'other/OtherDemos']
+      ["tabs/TabsDemo","state/StateDemo", "tabs/TabsDemo2", "audiopicker/AudioPickerDemo", "sidebar/SideBarDemo", 'other/OtherDemos','drag/DragDemo']
 
    aboutToAppear(): void {
       const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;

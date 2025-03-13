@@ -1,10 +1,12 @@
 {
   "src": [
     "pages/Index",
+    "pages/state/StateDemo",
     "pages/tabs/TabsDemo",
     "pages/tabs/TabsDemo2",
     "pages/audiopicker/AudioPickerDemo",
     "pages/sidebar/SideBarDemo",
-    "pages/other/OtherDemos"
+    "pages/other/OtherDemos",
+    "pages/drag/DragDemo"
   ]
 }
