@@ -25,7 +25,7 @@ export type MixedType =
 export class MyNodeController extends NodeController {
    private TAG = 'MyNodeController: ->'
    private buttonNode: BuilderNode<[object]> | null = null;
-   private wrapBuilder: WrappedBuilder<[object]>
+   public  wrapBuilder: WrappedBuilder<[object]>
    private param: MixedType;
 
    constructor(wrapBuilder: WrappedBuilder<[object]>, param: MixedType) {

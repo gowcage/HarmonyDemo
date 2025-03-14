@@ -1,11 +1,11 @@
-import { DropdownTabsBar } from './dropdowntabs/DropdownTabs';
-import { TabsContent } from './dropdowntabs/MyNodeController';
+import { DropdownTabs } from './dropdowntabs/DropdownTabs';
+import { TabsContent } from './dropdowntabs/DropdownTabsUtils';
 import {
    OuterTabContentNodeCtrl,
    OuterTabContentNodeCtrl2,
    ObservedArray
 } from './dropdowntabs/CustomTabContents';
-import { ContentType } from './dropdowntabs/MyNodeController'
+import { ContentType } from './dropdowntabs/DropdownTabsUtils'
 import { hilog } from '@kit.PerformanceAnalysisKit';
 
 let TAG = 'TabsDemo2: gqz->'
@@ -69,7 +69,8 @@ export struct TabsDemo2 {
 
    build() {
       Column() {
-         DropdownTabsBar({ tabContentNamesBackup: this.tabContentNames })
+         DropdownTabs({ tabContentNamesBackup: this.tabContentNames })
       }
+      .backgroundColor('#ddd')
    }
 }

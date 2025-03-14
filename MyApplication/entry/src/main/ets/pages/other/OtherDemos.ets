@@ -6,6 +6,7 @@ let TAG = 'OtherDemos: gqz->'
 @Component
 export struct OtherDemos {
    aboutToAppear(): void {
+
    }
 
    build() {

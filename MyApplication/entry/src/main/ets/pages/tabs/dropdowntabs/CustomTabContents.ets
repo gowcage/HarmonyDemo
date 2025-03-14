@@ -1,4 +1,4 @@
-import { MixedType, MyNodeController } from "./MyNodeController";
+import { MixedType, MyNodeController } from "./DropdownTabsUtils";
 
 /*
  * Test UI

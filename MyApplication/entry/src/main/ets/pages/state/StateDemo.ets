@@ -1,6 +1,6 @@
 import { ObservedArray } from '../tabs/dropdowntabs/CustomTabContents'
 import { hilog } from '@kit.PerformanceAnalysisKit'
-import { MixedType, MyNodeController } from '../tabs/dropdowntabs/MyNodeController'
+import { MixedType, MyNodeController } from '../tabs/dropdowntabs/DropdownTabsUtils'
 
 let TAG = 'StateDemo: gqz->'
 

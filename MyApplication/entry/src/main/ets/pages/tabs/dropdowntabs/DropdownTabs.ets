@@ -1,4 +1,4 @@
-import { TabsContent } from "./MyNodeController"
+import { TabsContent } from "./DropdownTabsUtils"
 import { hilog } from "@kit.PerformanceAnalysisKit"
 import { getTabContent } from "../TabsDemo2"
 import { ObservedArray } from "./CustomTabContents"
@@ -8,7 +8,7 @@ let TAG = 'DropdownTabsBar: gqz->'
 
 @Preview
 @Component
-export struct DropdownTabsBar {
+export struct DropdownTabs {
    @State private tabsIndex: number = 0
    @State private fontColor: string = '#182431'
    @State private selectedFontColor: string = '#007DFF'
@@ -100,6 +100,7 @@ export struct DropdownTabsBar {
                }.tabBar(this.tabBuilder(index, item.name))
             })
          }
+         .barBackgroundColor('white')
          .barMode(BarMode.Scrollable, { margin: this.dropdownBtnWidth })
          .barHeight(this.dropdownBtnWidth)
          .onChange((index: number) => {
@@ -133,8 +134,5 @@ export struct DropdownTabsBar {
                })
             })
       }
-      .backgroundColor('white')
-      .borderWidth(1)
-      .borderColor('red')
    }
 }
