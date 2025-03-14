@@ -90,12 +90,9 @@ export struct DropdownTabs {
             .fontWeight(this.tabsIndex === index ? 600 : 300)
             .lineHeight(22)
             .margin({ top: 17, bottom: 7 })
-         Divider()
-            .strokeWidth(2)
-            .color('#007DFF')
-            .opacity(this.tabsIndex === index ? 1 : 0)
+            .padding({ left: 15, right: 15 })
+            // .border({ width: { bottom: this.tabsIndex === index ? 2 : 0 }, color: '#007DFF' })
       }
-      .width('25%')
       .height(this.dropdownBtnWidth)
    }
 
@@ -136,6 +133,7 @@ export struct DropdownTabs {
                )
             })
          }
+         .width('100%')
          .barBackgroundColor('white')
          .barMode(BarMode.Scrollable, { margin: this.dropdownBtnWidth })
          .barHeight(this.dropdownBtnWidth)
