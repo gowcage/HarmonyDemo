@@ -4,6 +4,7 @@
     "pages/state/StateDemo",
     "pages/tabs/TabsDemo",
     "pages/tabs/TabsDemo2",
+    "pages/tabs/gesture/TabsDemo3",
     "pages/audiopicker/AudioPickerDemo",
     "pages/sidebar/SideBarDemo",
     "pages/other/OtherDemos",

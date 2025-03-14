@@ -6,6 +6,8 @@ import { DropdownComp } from "./DropdownComp"
 
 let TAG = 'DropdownTabsBar: gqz->'
 
+type OnGestureCB = () => void
+
 @Preview
 @Component
 export struct DropdownTabs {
@@ -16,9 +18,14 @@ export struct DropdownTabs {
    private controller: TabsController = new TabsController()
    private dropdownBtnWidth: number = 50
    @State @Watch('onChanged') private tabContentNamesDisplayed: ObservedArray<string> = new ObservedArray<string>()
-   @Link tabContentNamesBackup: ObservedArray<string> //作为备选项数据源
+   @State tabContentNamesBackup: ObservedArray<string> = new ObservedArray<string>() //作为备选项数据源
    @State private showTabContents: TabsContent[] = []
    private totalTabContents: TabsContent[] = []
+   //
+   leftPanGestureCB: OnGestureCB = () => {
+   }
+   rightPanGestureCB: OnGestureCB = () => {
+   }
 
    onChanged(changedVarName: string) {
       switch (changedVarName) {
@@ -40,8 +47,9 @@ export struct DropdownTabs {
    }
 
    initTabContentNames() {
-      if (this.tabContentNamesBackup.length > 4) {
-         this.tabContentNamesDisplayed = this.tabContentNamesBackup.splice(0, 4)
+      let initSize = 4
+      if (this.tabContentNamesBackup.length >= initSize) {
+         this.tabContentNamesDisplayed = this.tabContentNamesBackup.splice(0, initSize)
       }
    }
 
@@ -70,7 +78,7 @@ export struct DropdownTabs {
       })
 
       this.initTabContentNames()
-      this.setUpShowTabContents
+      this.setUpShowTabContents()
    }
 
    @Builder
@@ -98,6 +106,34 @@ export struct DropdownTabs {
                TabContent() {
                   NodeContainer(item.nodeCtrl)
                }.tabBar(this.tabBuilder(index, item.name))
+               .onGestureJudgeBegin((info, event) => {
+                  // if sliding to first or last page,we need to handle them
+                  let e = event as PanGestureEvent
+                  let isHorizontal = Math.abs(e.velocityX) / Math.abs(e.velocityY) > 2
+
+                  if (isHorizontal && e.velocityX > 0) { // right
+                     // hilog.debug(0, TAG, 'pan right')
+                     if (this.tabsIndex === 0) {
+                        this.rightPanGestureCB()
+                        return GestureJudgeResult.CONTINUE
+                     }
+
+                  } else if (isHorizontal && e.velocityX < 0) { // left
+                     // hilog.debug(0, TAG, 'pan left')
+                     if (this.tabsIndex === this.tabContentNamesDisplayed.length - 1) {
+                        this.leftPanGestureCB()
+                        return GestureJudgeResult.CONTINUE
+                     }
+                  }
+
+                  return GestureJudgeResult.REJECT
+               })
+               .gesture(
+                  GestureGroup(GestureMode.Parallel,
+                     PanGesture({ direction: PanDirection.Left, distance: 5 }),
+                     PanGesture({ direction: PanDirection.Right, distance: 5 })
+                  )
+               )
             })
          }
          .barBackgroundColor('white')
