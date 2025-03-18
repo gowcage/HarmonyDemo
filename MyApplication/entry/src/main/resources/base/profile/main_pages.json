@@ -9,6 +9,7 @@
     "pages/sidebar/SideBarDemo",
     "pages/other/OtherDemos",
     "pages/drag/DragDemo",
-    "pages/nodecontroller/NodeControllerDemo"
+    "pages/nodecontroller/NodeControllerDemo",
+    "pages/anim/AnimationDemo"
   ]
 }
