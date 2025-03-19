@@ -10,6 +10,7 @@
     "pages/other/OtherDemos",
     "pages/drag/DragDemo",
     "pages/nodecontroller/NodeControllerDemo",
-    "pages/anim/AnimationDemo"
+    "pages/anim/AnimationDemo",
+    "pages/ringslider/RingSliderDemo"
   ]
 }

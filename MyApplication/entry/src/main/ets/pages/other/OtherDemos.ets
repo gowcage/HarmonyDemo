@@ -38,8 +38,123 @@ export struct FontSize {
    }
 }
 
+@Component
+struct A {
+   build() {
+      Row() {
+         Image($r('app.media.startIcon')).width(40).height(40)
+         Column() {
+            Text('11111111')
+            Text('22222222')
+         }
+
+         Image($r('app.media.startIcon')).width(40).height(40)
+      }
+      .justifyContent(FlexAlign.SpaceBetween)
+      .width('100%')
+   }
+}
+
+@Component
+struct B {
+   build() {
+      Column() {
+         Image($r('app.media.startIcon')).width(150).height(150).margin({ top: 30, bottom: 30 })
+         C()
+         D()
+         E()
+      }
+      .width('100%')
+      .layoutWeight(1)
+      .border({ width: 2, color: 'green' })
+   }
+}
+
+@Component
+struct C {
+   build() {
+      Row() {
+         Image($r('app.media.startIcon')).width(40).height(40)
+         Image($r('app.media.startIcon')).width(40).height(40)
+         Image($r('app.media.startIcon')).width(40).height(40)
+      }
+      .justifyContent(FlexAlign.SpaceBetween)
+      .width('100%')
+      .margin({ top: 30 })
+   }
+}
+
+@Component
+struct D {
+   build() {
+      Row() {
+         Image($r('app.media.startIcon')).width(40).height(40)
+         Row() {
+            Text('11111111')
+            Divider().vertical(true).strokeWidth(2).height(20).color('white')
+            Text('22222222')
+            Divider().vertical(true).strokeWidth(2).height(20).color('white')
+            Text('33333333')
+         }
+
+         Image($r('app.media.startIcon')).width(40).height(40)
+      }
+      .justifyContent(FlexAlign.SpaceBetween)
+      .width('100%')
+      .margin({ top: 30, bottom: 30 })
+   }
+}
+
+@Component
+struct E {
+   build() {
+      Row() {
+         Image($r('app.media.startIcon')).width(36).height(36)
+         Image($r('app.media.startIcon')).width(42).height(42)
+         Image($r('app.media.startIcon')).width(36).height(36)
+      }
+      .alignItems(VerticalAlign.Center)
+      .justifyContent(FlexAlign.SpaceBetween)
+      .width('100%')
+      .layoutWeight(1)
+   }
+}
 
 @Entry
+@Component
+export struct OtherDemos {
+   build() {
+      Column() {
+         Row() {
+            Button()
+            Button()
+            Button()
+         }
+
+         Row() {
+            Text('11111111').onClick(() => {
+               hilog.debug(0, TAG, 'onClick...')
+            }).onTouch((event: TouchEvent) => {
+               hilog.debug(0, TAG, 'onTouch...')
+            })
+            Text('22222222')
+         }.justifyContent(FlexAlign.SpaceBetween)
+         .width('100%')
+
+         Divider().strokeWidth(2).color('black').margin({ top: 20, bottom: 20 })
+
+         A()
+
+         B()
+      }
+      .width('100%')
+      .height('100%')
+      .border({ width: 3, color: 'black' })
+   }
+}
+
+
+/*@Entry
 @Component
 export struct OtherDemos {
    aboutToAppear(): void {
@@ -155,5 +270,5 @@ export struct OtherDemos {
          }
       }.scrollable(ScrollDirection.Vertical)
    }
-}
+}*/
 
