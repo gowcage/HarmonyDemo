@@ -37,8 +37,13 @@ struct RingSliderDemo {
             let arc = deg * Math.PI / 180
             let x = Math.sin(arc)
             let y = Math.cos(arc) * -1
-            this.offX = x * this.ringSliderRadius
-            this.offY = y * this.ringSliderRadius
+            /*
+             * 对齐Thumb和progress
+             * 用progress半径减去 (progress strokeWidth/2 + (Thumb.width-1)/2)
+             * Thumb.width为奇数最佳
+             * */
+            this.offX = x * (this.ringSliderRadius - 4)
+            this.offY = y * (this.ringSliderRadius - 4)
          }
       }
    }
@@ -48,23 +53,15 @@ struct RingSliderDemo {
          Stack() {
             Progress({ value: this.value, total: this.max, type: ProgressType.Ring })
                .width(this.ringSliderDiameter)
-               .height(this.ringSliderDiameter)
-               .color('#ff0996bc')
-               .backgroundColor('#aaa')
-               .style({ strokeWidth: 2 })
-            // Progress Thumb
-            Text()
-               .backgroundColor('#fff')
-               .width(8)
-               .height(8)
-               .borderRadius(8)
-               .shadow({ color: 'black', radius: 8 })
-               .offset({ x: this.offX, y: this.offY })
+               .height(this.ringSliderDiameter)// .color('#ff0996bc')
+               .color(new LinearGradient([{ offset: 0, color: '#ff87bee2' }, { offset: 1, color: '#ff1394e7' }]))
+               .backgroundColor('#66aaaaaa')
+               .style({ strokeWidth: 2, shadow: true })
 
             Text()
                .width(this.ringSliderDiameter)
                .height(this.ringSliderDiameter)
-               .backgroundColor('#1000')
+               .backgroundColor('#22ff0000')
                .borderRadius(this.ringSliderDiameter)
                .onClick(() => {
                   hilog.debug(0, TAG, 'onClick...')
@@ -87,6 +84,15 @@ struct RingSliderDemo {
                   }
                   this.value = deg / 360 * this.max
                })
+
+            // Progress Thumb
+            Text()
+               .backgroundColor('#fff')
+               .width(7)
+               .height(7)
+               .borderRadius(7)
+               .shadow({ color: 'black', radius: 7 })
+               .offset({ x: this.offX, y: this.offY })
          }
       }
       .justifyContent(FlexAlign.Center)
