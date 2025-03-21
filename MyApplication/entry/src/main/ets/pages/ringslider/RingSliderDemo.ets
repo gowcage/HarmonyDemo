@@ -1,19 +1,19 @@
 import hilog from '@ohos.hilog'
 
-let TAG = 'RingSliderDemo: gqz->'
-
 @Entry
 @Component
 struct RingSliderDemo {
+   TAG = 'RingSliderDemo: gqz->'
    @State @Watch('onVarChanged') private value: number = 0
    @State private max: number = 100
    @State private offX: number = 0
    @State private offY: number = 0
    @State ringSliderRadius: number = 100
    private ringSliderDiameter: number = this.ringSliderRadius * 2
+   private thumberOff: number = 4
 
    aboutToAppear(): void {
-      this.offY = -100
+      this.offY = -100 - this.thumberOff
    }
 
    typeStr(type: TouchType): string {
@@ -42,8 +42,8 @@ struct RingSliderDemo {
              * 用progress半径减去 (progress strokeWidth/2 + (Thumb.width-1)/2)
              * Thumb.width为奇数最佳
              * */
-            this.offX = x * (this.ringSliderRadius - 4)
-            this.offY = y * (this.ringSliderRadius - 4)
+            this.offX = x * (this.ringSliderRadius - this.thumberOff)
+            this.offY = y * (this.ringSliderRadius - this.thumberOff)
          }
       }
    }
@@ -53,19 +53,25 @@ struct RingSliderDemo {
          Stack() {
             Progress({ value: this.value, total: this.max, type: ProgressType.Ring })
                .width(this.ringSliderDiameter)
-               .height(this.ringSliderDiameter)// .color('#ff0996bc')
-               .color(new LinearGradient([{ offset: 0, color: '#ff87bee2' }, { offset: 1, color: '#ff1394e7' }]))
-               .backgroundColor('#66aaaaaa')
+               .height(this.ringSliderDiameter)
+               .color('orange')// .color(new LinearGradient([{ offset: 0, color: '#ff87bee2' }, { offset: 1, color: '#ff1394e7' }]))
+               .backgroundColor('#8fff')
                .style({ strokeWidth: 2, shadow: true })
+
+            // Progress Thumb
+            Text()
+               .backgroundColor('white')
+               .width(7)
+               .height(7)
+               .borderRadius(7)
+               .shadow({ color: 'black', radius: 7 })
+               .offset({ x: this.offX, y: this.offY })
 
             Text()
                .width(this.ringSliderDiameter)
                .height(this.ringSliderDiameter)
-               .backgroundColor('#22ff0000')
+               .backgroundColor('#10f0')
                .borderRadius(this.ringSliderDiameter)
-               .onClick(() => {
-                  hilog.debug(0, TAG, 'onClick...')
-               })
                .onTouch((event: TouchEvent) => {
                   let touch = event.touches[0]
                   let x = touch.x
@@ -76,28 +82,19 @@ struct RingSliderDemo {
                   let deg = arc * 180 / Math.PI - 90 // -90 上面调整后，progress组件的0在正上方，touch的0位置在正左边
                   deg = deg < 0 ? deg + 360 : deg
                   if (event.type == TouchType.Up) {
-                     hilog.debug(0, TAG,
+                     hilog.debug(0, this.TAG,
                         'onTouch: ' + this.typeStr(event.type) + '  ' + cx + '/' + cy + '  arc=' + arc + '  deg=' + deg)
                   } else {
-                     hilog.debug(0, TAG,
+                     hilog.debug(0, this.TAG,
                         'onTouch: ' + '  deg=' + deg)
                   }
                   this.value = deg / 360 * this.max
                })
-
-            // Progress Thumb
-            Text()
-               .backgroundColor('#fff')
-               .width(7)
-               .height(7)
-               .borderRadius(7)
-               .shadow({ color: 'black', radius: 7 })
-               .offset({ x: this.offX, y: this.offY })
          }
       }
-      .justifyContent(FlexAlign.Center)
       .alignItems(HorizontalAlign.Center)
-      .height('100%')
+      .justifyContent(FlexAlign.Center)
       .width('100%')
+      .height('100%')
    }
 }

@@ -2,6 +2,69 @@ import { hilog } from "@kit.PerformanceAnalysisKit"
 
 let TAG = 'OtherDemos: gqz->'
 
+
+@Builder
+function Bg(res: Resource, blur: BlurStyle) {
+   Image(res)
+      .width('100%')
+      .height('100%')
+      .objectFit(ImageFit.Contain)
+      .backgroundBlurStyle(blur)
+}
+
+@Builder
+function Txt(blur: number) {
+   Text()
+      .backgroundImage($r('app.media.bg'))
+      .backgroundImageSize({width: 125,height:100})
+      .width(125)
+      .height(100)
+      .border({ width: 1, color: 'black' })
+      .blur(blur)
+}
+
+@Entry
+@Component
+struct OtherDemos {
+   build() {
+      Column({ space: 20 }) {
+         Row() {
+            Txt(0)
+         }.width('100%')
+         .justifyContent(FlexAlign.SpaceBetween)
+
+         Row() {
+            Txt(1)
+            Txt(3)
+            Txt(5)
+         }.width('100%')
+         .justifyContent(FlexAlign.SpaceBetween)
+
+         Row() {
+            Txt(10)
+            Txt(20)
+            Txt(30)
+         }.width('100%')
+         .justifyContent(FlexAlign.SpaceBetween)
+
+         Row() {
+            Txt(50)
+            Txt(100)
+            Txt(150)
+         }.width('100%')
+         .justifyContent(FlexAlign.SpaceBetween)
+
+         Row() {
+            Txt(300)
+            Txt(600)
+            Txt(900)
+         }.width('100%')
+         .justifyContent(FlexAlign.SpaceBetween)
+      }
+   }
+}
+
+
 @Preview
 @Component
 export struct FontSize {
@@ -120,7 +183,8 @@ struct E {
    }
 }
 
-@Entry
+
+/*@Entry
 @Component
 export struct OtherDemos {
    build() {
@@ -151,7 +215,7 @@ export struct OtherDemos {
       .height('100%')
       .border({ width: 3, color: 'black' })
    }
-}
+}*/
 
 
 /*@Entry
