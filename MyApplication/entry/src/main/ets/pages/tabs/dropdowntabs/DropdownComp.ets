@@ -5,7 +5,6 @@ import { BusinessError } from '@kit.BasicServicesKit'
 import { JSON } from '@kit.ArkTS'
 import { ObservedArray } from './CustomTabContents'
 
-@Preview
 @Component
 export struct DropdownComp {
    TAG = 'DropdownComp: gqz->'

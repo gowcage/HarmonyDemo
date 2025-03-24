@@ -33,8 +33,8 @@ export struct AudioPickerDemo {
             audioPicker.select({
                maxSelectNumber: 500,
                authMode: true/*, fileSuffixFilters: ['mp3', 'wav', 'ape', 'flac']*/,
-               multiAuthMode: true, // true才有全选按钮
-               mergeMode: picker.MergeTypeMode.AUDIO
+               multiAuthMode: true, // 支持批量授权模式, true才有全选按钮
+               mergeMode: picker.MergeTypeMode.AUDIO // 仅音频文件
             })
                .then((res) => {
                   hilog.debug(0, TAG, '--------------------------------------------------------')

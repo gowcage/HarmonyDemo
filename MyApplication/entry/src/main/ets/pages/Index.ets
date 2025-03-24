@@ -4,8 +4,7 @@ import { LengthMetrics, router } from '@kit.ArkUI';
 import hilog from '@ohos.hilog';
 import { AudioPickerDemo } from './audiopicker/AudioPickerDemo';
 import { abilityAccessCtrl, common, Permissions } from '@kit.AbilityKit';
-import { BusinessError } from '@kit.BasicServicesKit';
-
+import { BusinessError, deviceInfo } from '@kit.BasicServicesKit';
 
 const permissions: Array<Permissions> = ['ohos.permission.READ_MEDIA', 'ohos.permission.FILE_ACCESS_PERSIST'];
 
@@ -34,6 +33,7 @@ function reqPermissionsFromUser(permissions: Array<Permissions>, context: common
 @Entry
 @Component
 struct Index {
+   TAG = 'Index: hiby->'
    private arr: string[] =
       ['tabs/TabsDemo', 'tabs/TabsDemo2', 'tabs/gesture/TabsDemo3', 'state/StateDemo', 'audiopicker/AudioPickerDemo',
          'sidebar/SideBarDemo', 'other/OtherDemos', 'drag/DragDemo', 'nodecontroller/NodeControllerDemo',
@@ -41,7 +41,10 @@ struct Index {
 
    aboutToAppear(): void {
       const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
-      reqPermissionsFromUser(permissions, context)
+      // reqPermissionsFromUser(permissions, context)
+
+      // judge API whether is available
+      hilog.debug(0, this.TAG, 'sdkApiVer: '+ deviceInfo.sdkApiVersion)
    }
 
    build() {

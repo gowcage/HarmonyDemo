@@ -1,7 +1,123 @@
 import { hilog } from "@kit.PerformanceAnalysisKit"
+import { promptAction } from "@kit.ArkUI"
 
 let TAG = 'OtherDemos: gqz->'
 
+class TextInfoItem {
+   key: string = ''
+   value: string = ''
+
+   constructor(key: string, value: string) {
+      this.key = key
+      this.value = value
+   }
+}
+
+let infos: TextInfoItem[] = [
+   new TextInfoItem('歌曲名：', '爱人错过'),
+   new TextInfoItem('专辑：', '我肯定在几百年前就说过爱你'),
+   new TextInfoItem('艺术家：', '告五人'),
+   new TextInfoItem('专辑艺术家：', '未知'),
+   new TextInfoItem('风格：', '未知'),
+   new TextInfoItem('位置：', '/storage/emulated/0/Music/爱人错过_告五人我肯定在几百年前就说过爱你.mp3'),
+   new TextInfoItem('年代：', '未知'),
+   new TextInfoItem('时长：', '04:52'),
+   new TextInfoItem('大小：', '4.54MB'),
+   new TextInfoItem('采样率：', '48.0kHZ'),
+   new TextInfoItem('格式：', 'MPEG-Layer 3'),
+   new TextInfoItem('比特率：', '128kbps'),
+   new TextInfoItem('位深：', '16 bits'),
+   new TextInfoItem('起始播放点：', '00:00'),
+   new TextInfoItem('声道：', '2'),
+   new TextInfoItem('质量评分：', '1'),
+   new TextInfoItem('音轨号：', '0'),
+   new TextInfoItem('唱片编号：', '0'),
+   new TextInfoItem('播放次数：', '19'),
+   new TextInfoItem('', ''),// holder place
+]
+
+@Builder
+function TextInfoItem1Builder(info: TextInfoItem) {
+   Row() {
+      Text(info.key)
+         .fontSize(16)
+         .fontWeight(300)
+         .fontColor('black')
+      Text(info.value)
+         .fontSize(16)
+         .fontWeight(300)
+         .fontColor('gray')
+         .layoutWeight(1)
+         .lineBreakStrategy(LineBreakStrategy.GREEDY)
+
+   }
+   .clip(true)
+   .alignItems(VerticalAlign.Top)
+}
+
+/*@Preview
+@Entry
+@Component
+struct OtherDemos {
+   build() {
+      Column() {
+         Text('歌曲信息')
+            .fontSize(16)
+            .fontWeight(400)
+            .height(40)
+            .padding({ left: 8 })
+         Divider().height(1).color('gray')
+         Scroll() {
+            Column({ space: 24 }) {
+               ForEach(infos.slice(0, 6), (info: TextInfoItem, index) => {
+                  TextInfoItem1Builder(info)
+               })
+
+               Text('歌曲信息乱码？')
+                  .fontColor('gray')
+                  .fontSize(14)
+                  .border({ width: { bottom: 1}, color: 'gray' })
+                  .textAlign(TextAlign.Center)
+                  .onClick(() => {
+                     promptAction.showToast({ message: '乱码' })
+                  })
+
+               Divider().height(1).color('gray')
+
+               Row() {
+                  Column({ space: 24 }) {
+                     ForEach(infos.slice(6, infos.length), (info: TextInfoItem, index) => {
+                        if (index % 2 == 0) {
+                           TextInfoItem1Builder(info)
+                        }
+                     })
+                  }.layoutWeight(1)
+
+                  Column({ space: 24 }) {
+                     ForEach(infos.slice(6, infos.length), (info: TextInfoItem, index) => {
+                        if (index % 2 == 1) {
+                           TextInfoItem1Builder(info)
+                        }
+                     })
+                  }.layoutWeight(1)
+
+               }.alignItems(VerticalAlign.Top)
+            }
+            .padding({
+               left: 8,
+               right: 8,
+               top: 16,
+               bottom: 16
+            })
+         }
+         .width('100%')
+         .layoutWeight(1)
+      }
+      .height('50%')
+      .alignItems(HorizontalAlign.Start)
+      .border({ width: 1, color: 'black' })
+   }
+}*/
 
 @Builder
 function Bg(res: Resource, blur: BlurStyle) {
@@ -16,7 +132,7 @@ function Bg(res: Resource, blur: BlurStyle) {
 function Txt(blur: number) {
    Text()
       .backgroundImage($r('app.media.bg'))
-      .backgroundImageSize({width: 125,height:100})
+      .backgroundImageSize({ width: 125, height: 100 })
       .width(125)
       .height(100)
       .border({ width: 1, color: 'black' })
@@ -24,6 +140,35 @@ function Txt(blur: number) {
 }
 
 @Entry
+@Component
+struct OtherDemos {
+   @State blur1: number = 0
+   @State blur2: number = 0
+
+   build() {
+      Column({ space: 20 }) {
+         Slider({ value: this.blur1, min: 0, max: 200 })
+            .onChange((value: number, mode: SliderChangeMode) => {
+               this.blur1 = value
+            })
+         Text('Blur: '+this.blur1).fontSize(16)
+         Image($r('app.media.bg')).blur(this.blur1)
+            .width('100%')
+
+         Blank().height(50)
+
+         Slider({ value: this.blur2, min: 0, max: 200 })
+            .onChange((value: number, mode: SliderChangeMode) => {
+               this.blur2 = value
+            })
+         Text('Blur: '+this.blur2).fontSize(16)
+         Image($r('app.media.bg')).blur(this.blur2)
+            .width('100%')
+      }
+   }
+}
+
+/*@Entry
 @Component
 struct OtherDemos {
    build() {
@@ -62,7 +207,7 @@ struct OtherDemos {
          .justifyContent(FlexAlign.SpaceBetween)
       }
    }
-}
+}*/
 
 
 @Preview
