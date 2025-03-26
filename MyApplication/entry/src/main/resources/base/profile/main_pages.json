@@ -11,6 +11,7 @@
     "pages/drag/DragDemo",
     "pages/nodecontroller/NodeControllerDemo",
     "pages/anim/AnimationDemo",
-    "pages/ringslider/RingSliderDemo"
+    "pages/ringslider/RingSliderDemo",
+    "pages/scanpublicdir/ScanPublicDir"
   ]
 }

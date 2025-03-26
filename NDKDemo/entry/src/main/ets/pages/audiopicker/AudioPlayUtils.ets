@@ -109,7 +109,7 @@ export async function activatePermission(uris: string[]): Promise<void> {
   }
   let policies: Array<fileShare.PolicyInfo> = [policyInfo]
 
-  fileShare.activatePermission(policies).then(() => {
+  return fileShare.activatePermission(policies)/*.then(() => {
     hilog.debug(0, TAG, "activatePermission successfully")
     return true
   }).catch(async (err: BusinessError<Array<fileShare.PolicyErrorResult>>) => {
@@ -124,5 +124,5 @@ export async function activatePermission(uris: string[]): Promise<void> {
         }
       }
     }
-  })
+  })*/
 }

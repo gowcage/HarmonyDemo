@@ -37,7 +37,7 @@ struct Index {
    private arr: string[] =
       ['tabs/TabsDemo', 'tabs/TabsDemo2', 'tabs/gesture/TabsDemo3', 'state/StateDemo', 'audiopicker/AudioPickerDemo',
          'sidebar/SideBarDemo', 'other/OtherDemos', 'drag/DragDemo', 'nodecontroller/NodeControllerDemo',
-         'anim/AnimationDemo', 'ringslider/RingSliderDemo']
+         'anim/AnimationDemo', 'ringslider/RingSliderDemo','scanpublicdir/ScanPublicDir']
 
    aboutToAppear(): void {
       const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;

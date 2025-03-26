@@ -7,6 +7,7 @@ import { router } from '@kit.ArkUI';
 import picker from '@ohos.file.picker';
 import { fileUri, fileIo as fs } from '@kit.CoreFileKit'
 import { PermissionUtils } from './PermissionUtils';
+import testNapi from 'libentry.so';
 
 let TAG = 'AudioPickerDemo: gqz->'
 
@@ -35,7 +36,7 @@ export struct AudioPickerDemo {
             audioPicker.select({
                maxSelectNumber: 500,
                authMode: true/*, fileSuffixFilters: ['mp3', 'wav', 'ape', 'flac']*/,
-               defaultFilePathUri:'file://docs/storage/Users/currentUser/Music',
+               defaultFilePathUri:'file://docs/storage/Users/currentUser/Download',
                multiAuthMode: true, // 支持批量授权模式, true才有全选按钮
                mergeMode: picker.MergeTypeMode.AUDIO // 仅音频文件
             })
@@ -47,7 +48,9 @@ export struct AudioPickerDemo {
                   })
                   persistPermission(res).then(() => {
                      this.uri = res
-                     activatePermission(this.uri)
+                     activatePermission(this.uri).then(()=>{
+                        hilog.debug(0, this.TAG, 'activatePermission success')
+                     })
                   })
                   hilog.debug(0, TAG, '--------------------------------------------------------')
                })
@@ -56,9 +59,9 @@ export struct AudioPickerDemo {
                })
          })
 
-         Button('Play uri').onClick(() => {
+         Button('Play uri').onClick(async () => {
             // new AVPlayerDemo().avPlayerUrlDemo()
-            hilog.debug(0, TAG, '--------------------------------------------------------')
+            hilog.debug(0, TAG, 'play uri--------------------------------------------')
             // PlayMusic(this.uri[0])
 
             // let sbPath = AppStorage.get<string>('sandBoxPath')
@@ -68,7 +71,25 @@ export struct AudioPickerDemo {
             // let js = decodeURIComponent(this.uri[0])
             // hilog.debug(0, TAG, 'decode uri: ' + js)
 
-            activatePermission(this.uri).then(()=>{
+            hilog.debug(0, this.TAG, 'uri: ' + decodeURI(this.uri[0]))
+            let ret = testNapi.add(1,2)
+            hilog.debug(0, this.TAG, 'add: '+ret)
+
+            let ctx = getContext(this) as common.Context
+            let uri = decodeURI(this.uri[0])
+            let fname = uri.substring(uri.lastIndexOf("/") + 1/*, uri.lastIndexOf(".")*/)
+            let dstUri = ctx.filesDir + '/' + fname
+            if (!fs.accessSync(dstUri, fs.AccessModeType.EXIST)) {
+               fs.openSync(dstUri, fs.OpenMode.READ_ONLY | fs.OpenMode.CREATE)
+            }
+            let f = fs.openSync(this.uri[0], fs.OpenMode.READ_ONLY)
+            if (f) {
+               fs.copyFileSync(f.fd, dstUri)
+            }
+
+            testNapi.test(decodeURI(this.uri[0]).substring('file://docs'.length))
+
+            /*activatePermission(this.uri).then(()=>{
 
                let uri = this.uri[0]
                fs.open(uri).then((file) => {
@@ -80,7 +101,7 @@ export struct AudioPickerDemo {
                   hilog.error(0, TAG, `file打开失败 code=${e.code}, message=${e.message}, uri=${uri}`)
                })
 
-            })
+            })*/
          })
       }
       .width('100%').height('100%').justifyContent(FlexAlign.Center).alignItems(HorizontalAlign.Center)
