@@ -146,24 +146,36 @@ struct OtherDemos {
    @State blur2: number = 0
 
    build() {
-      Column({ space: 20 }) {
-         Slider({ value: this.blur1, min: 0, max: 200 })
-            .onChange((value: number, mode: SliderChangeMode) => {
-               this.blur1 = value
-            })
-         Text('Blur: '+this.blur1).fontSize(16)
-         Image($r('app.media.bg')).blur(this.blur1)
-            .width('100%')
+      Scroll() {
+         Column({ space: 16 }) {
+            Slider({ value: this.blur1, min: 0, max: 200 })
+               .onChange((value: number, mode: SliderChangeMode) => {
+                  this.blur1 = value
+               })
+            Text('Blur: ' + this.blur1).fontSize(16)
+            Image($r('app.media.bg')).blur(this.blur1)
+               .width('100%')
 
-         Blank().height(50)
+            Blank().height(50)
 
-         Slider({ value: this.blur2, min: 0, max: 200 })
-            .onChange((value: number, mode: SliderChangeMode) => {
-               this.blur2 = value
-            })
-         Text('Blur: '+this.blur2).fontSize(16)
-         Image($r('app.media.bg')).blur(this.blur2)
-            .width('100%')
+            Slider({ value: this.blur2, min: 0, max: 200 })
+               .onChange((value: number, mode: SliderChangeMode) => {
+                  this.blur2 = value
+               })
+            Text('Blur: ' + this.blur2).fontSize(16)
+            Image($r('app.media.bg')).blur(this.blur2)
+               .width('100%')
+
+            Column({ space: 12 }) {
+               Text('中国智造 Made In China 12340').fontSize(16).fontColor('#1c1c1c')
+               Text('中国智造 Made In China 12340').fontSize(16).fontColor('#701c1c1c')
+            }.backgroundColor(Color.White).padding(16)
+
+            Column({ space: 12 }) {
+               Text('中国智造 Made In China 12340').fontSize(16).fontColor('#e8e8e8')
+               Text('中国智造 Made In China 12340').fontSize(16).fontColor('#90e8e8e8')
+            }.backgroundColor(Color.Black).padding(16)
+         }
       }
    }
 }
