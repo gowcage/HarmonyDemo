@@ -142,8 +142,50 @@ function Txt(blur: number) {
 @Entry
 @Component
 struct OtherDemos {
+   aboutToAppear(): void {
+      let arr: number[] = [1, 2, 3, 4, 5]
+      let arrStr = JSON.stringify(arr)
+      hilog.debug(0, TAG, '' + arrStr)
+      let arr2: number[] = JSON.parse(arrStr)
+      hilog.debug(0, TAG, '' + arr2)
+      hilog.debug(0, TAG, '' + arr2[2])
+   }
+
+   build() {
+
+   }
+}
+
+/*@Entry
+@Component
+struct OtherDemos {
    @State blur1: number = 0
    @State blur2: number = 0
+
+   aboutToAppear(): void {
+      hilog.info(0x00, TAG, 'aboutToAppear')
+   }
+
+   onDidBuild(): void {
+      hilog.info(0x00, TAG, 'onDidBuild')
+   }
+
+   aboutToDisappear(): void {
+      hilog.info(0x00, TAG, 'aboutToDisappear')
+   }
+
+   onPageShow(): void {
+      hilog.info(0x00, TAG, 'onPageShow')
+   }
+
+   onPageHide(): void {
+      hilog.info(0x00, TAG, 'onPageHide')
+   }
+
+   onBackPress(): boolean | void {
+      hilog.info(0x00, TAG, 'onBackPress')
+      return false
+   }
 
    build() {
       Scroll() {
@@ -175,10 +217,21 @@ struct OtherDemos {
                Text('中国智造 Made In China 12340').fontSize(16).fontColor('#e8e8e8')
                Text('中国智造 Made In China 12340').fontSize(16).fontColor('#90e8e8e8')
             }.backgroundColor(Color.Black).padding(16)
+
+            Row(){
+               Text().width(30).height(30).border({ width: 1, color: 'red'})
+               Text().width(30).height(30).border({ width: 1, color: 'black'}).layoutWeight(1)
+               Text().width(30).height(30).border({ width: 1, color: 'blue'})
+            }
+            Column(){
+               Text().width(30).height(30).border({ width: 1, color: 'red'})
+               Text().width(30).height(30).border({ width: 1, color: 'black'}).layoutWeight(1)
+               Text().width(30).height(30).border({ width: 1, color: 'blue'})
+            }.height(120)
          }
       }
    }
-}
+}*/
 
 /*@Entry
 @Component

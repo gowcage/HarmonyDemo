@@ -2,6 +2,7 @@
   "src": [
     "pages/Index",
     "pages/state/StateDemo",
+    "pages/state/StateDemo2",
     "pages/tabs/TabsDemo",
     "pages/tabs/TabsDemo2",
     "pages/tabs/gesture/TabsDemo3",

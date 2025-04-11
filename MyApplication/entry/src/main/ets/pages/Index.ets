@@ -35,7 +35,7 @@ function reqPermissionsFromUser(permissions: Array<Permissions>, context: common
 struct Index {
    TAG = 'Index: hiby->'
    private arr: string[] =
-      ['tabs/TabsDemo', 'tabs/TabsDemo2', 'tabs/gesture/TabsDemo3', 'state/StateDemo', 'audiopicker/AudioPickerDemo',
+      ['tabs/TabsDemo', 'tabs/TabsDemo2', 'tabs/gesture/TabsDemo3', 'state/StateDemo2', 'audiopicker/AudioPickerDemo',
          'sidebar/SideBarDemo', 'other/OtherDemos', 'drag/DragDemo', 'nodecontroller/NodeControllerDemo',
          'anim/AnimationDemo', 'ringslider/RingSliderDemo','scanpublicdir/ScanPublicDir']
 
