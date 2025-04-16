@@ -37,14 +37,14 @@ struct Index {
    private arr: string[] =
       ['tabs/TabsDemo', 'tabs/TabsDemo2', 'tabs/gesture/TabsDemo3', 'state/StateDemo2', 'audiopicker/AudioPickerDemo',
          'sidebar/SideBarDemo', 'other/OtherDemos', 'drag/DragDemo', 'nodecontroller/NodeControllerDemo',
-         'anim/AnimationDemo', 'ringslider/RingSliderDemo','scanpublicdir/ScanPublicDir']
+         'anim/AnimationDemo', 'ringslider/RingSliderDemo', 'scanpublicdir/ScanPublicDir', 'meta/MetaInfoDemo']
 
    aboutToAppear(): void {
       const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
       // reqPermissionsFromUser(permissions, context)
 
       // judge API whether is available
-      hilog.debug(0, this.TAG, 'sdkApiVer: '+ deviceInfo.sdkApiVersion)
+      hilog.debug(0, this.TAG, 'sdkApiVer: ' + deviceInfo.sdkApiVersion)
    }
 
    build() {

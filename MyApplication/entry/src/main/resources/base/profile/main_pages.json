@@ -13,6 +13,7 @@
     "pages/nodecontroller/NodeControllerDemo",
     "pages/anim/AnimationDemo",
     "pages/ringslider/RingSliderDemo",
-    "pages/scanpublicdir/ScanPublicDir"
+    "pages/scanpublicdir/ScanPublicDir",
+    "pages/meta/MetaInfoDemo"
   ]
 }

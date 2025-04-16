@@ -3,6 +3,47 @@ import { promptAction } from "@kit.ArkUI"
 
 let TAG = 'OtherDemos: gqz->'
 
+@Entry
+@Component
+export struct OtherDemos {
+   @State arr: number[] = [1, 2, 3, 4]
+
+   build() {
+      Column() {
+         Text('=============')
+            .fontSize(24)
+            .height(50)
+            .width('100%')
+            .border({ width: 1, color: 'black' })
+            .onClick(() => {
+               this.arr.push(this.arr.length + 1)
+            })
+
+         Scroll() {
+            Column() {
+               ForEach(this.arr, (item: number, index: number) => {
+                  Text('item ' + item)
+                     .fontSize(24)
+                     .height(50)
+                     .width('100%')
+                     .border({ width: 1, color: 'black' })
+               })
+            }
+         }
+         .align(Alignment.Top)
+         .layoutWeight(1)
+         .border({ width: 1, color: 'red' })
+
+         Text('=============')
+            .fontSize(24)
+            .height(50)
+            .width('100%')
+            .border({ width: 1, color: 'black' })
+      }.height("50%").width('100%')
+      .border({ width: 2, color: 'green' })
+   }
+}
+
 class TextInfoItem {
    key: string = ''
    value: string = ''
@@ -139,7 +180,7 @@ function Txt(blur: number) {
       .blur(blur)
 }
 
-@Entry
+/*@Entry
 @Component
 struct OtherDemos {
    aboutToAppear(): void {
@@ -154,7 +195,7 @@ struct OtherDemos {
    build() {
 
    }
-}
+}*/
 
 /*@Entry
 @Component
