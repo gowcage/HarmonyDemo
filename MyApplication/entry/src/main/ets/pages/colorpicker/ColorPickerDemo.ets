@@ -30,9 +30,7 @@ export struct ColorPickerDemo {
    @State block2: number = 0.05
    //
    private settings1: RenderingContextSettings = new RenderingContextSettings(true)
-   private settings2: RenderingContextSettings = new RenderingContextSettings(true)
    private ctx1: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.settings1)
-   private ctx2: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.settings2)
    private gradient: CanvasGradient = new CanvasGradient()
    private gradient2: CanvasGradient = new CanvasGradient()
    // 色系
@@ -48,9 +46,6 @@ export struct ColorPickerDemo {
 
    aboutToAppear(): void {
       this.topCanvasHeight = this._height
-      this.gradient = this.ctx1.createLinearGradient(0, 0, this._width, 0)
-      this.gradient.addColorStop(0, '#ffff')
-      this.gradient.addColorStop(1, this.slctClr) // todo: this color need to be a state variable
 
       this.gradient2 = this.ctx1.createLinearGradient(0, this.topCanvasHeight, 0, 0)
       this.gradient2.addColorStop(0, '#f000')
@@ -68,6 +63,9 @@ export struct ColorPickerDemo {
       // this.ctx1.clearRect(0,0,this._width, this.topCanvasHeight)
       // this.ctx1.reset()
       // draw color panel
+      this.gradient = this.ctx1.createLinearGradient(0, 0, this._width, 0)
+      this.gradient.addColorStop(0, '#ffff')
+      this.gradient.addColorStop(1, this.colorRGBtoHex(this.rgb)) // todo: this color need to be a state variable
       this.ctx1.fillStyle = this.gradient
       this.ctx1.fillRect(0, 0, this._width, this.topCanvasHeight)
       this.ctx1.fillStyle = this.gradient2
@@ -88,8 +86,8 @@ export struct ColorPickerDemo {
       // this.color = [left[0] * (1 - ratio) + right[0] * ratio, left[1] * (1 - ratio) + right[1] * ratio,
       //    left[2] * (1 - ratio) + right[2] * ratio]
       // this.color = [this.color[0] * (1 - vratio), this.color[1] * (1 - vratio), this.color[2] * (1 - vratio)]
-      hilog.debug(0, this.TAG, 'getColor2():  color: ' + this.color + '  rgb:' + this.colorRGBtoHex())
-      this.slctClr = this.colorRGBtoHex()
+      hilog.debug(0, this.TAG, 'getColor2():  color: ' + this.color + '  rgb:' + this.colorRGBtoHex(this.color))
+      this.slctClr = this.colorRGBtoHex(this.color)
    }
 
    getMainColor(ratio: number) {
@@ -97,10 +95,11 @@ export struct ColorPickerDemo {
       let leftClr = this.colors[0]
       let rightClr = this.colors[1]
       let startRatio = 0
-      for (let i = 0; i < this.colors.length - 1; i++) {
+      for (let i = 0; i < this.colors.length; i++) {
          let p: number[] = this.colors[i]
+
          if (i == this.colors.length - 1) {
-            leftClr = p
+            leftClr = this.colors[i-1]
             rightClr = p
             break
          }
@@ -113,10 +112,12 @@ export struct ColorPickerDemo {
             break
          }
       }
-      this.rgb = this.getColorBetween2Color(ratio - startRatio, leftClr, rightClr)
+      this.rgb = this.getColorBetween2Color((ratio - startRatio) / (1 / 6), leftClr, rightClr)
       this.getColor2()
       this.draw1()
-      // hilog.debug(0, TAG, 'ratio=' + ratio + '  startRatio=' + startRatio)
+      hilog.debug(0, this.TAG,
+         'ratio=' + ratio + '  startRatio=' + startRatio + '  startColor=' + leftClr.join() + '  rightColor=' +
+         rightClr.join() + '  rgb=' + this.rgb.join())
    }
 
    getColorBetween2Color(ratio: number, leftClr: number[], rightClr: number[]): number[] {
@@ -131,7 +132,7 @@ export struct ColorPickerDemo {
     * 再根据这个数值到0，获得垂直比例数值，得到这个数值
     * 最后使用
     */
-   getColor() {
+   /*getColor() {
       const width = this.ctx1.width
       const height = this.maxHeight
       this.color = this.rgb.map((p: number) => {
@@ -142,11 +143,11 @@ export struct ColorPickerDemo {
       // this.$colorValue(this.colorRGBtoHex())
       hilog.debug(0, this.TAG, 'color: ' + this.color + '  rgb:' + this.colorRGBtoHex())
       this.slctClr = this.colorRGBtoHex()
-   }
+   }*/
 
    // rgb转16进制
-   colorRGBtoHex(): string {
-      const rgb = this.color.map(p => p.toString())
+   colorRGBtoHex(color: number[]): string {
+      const rgb = color.map(p => p.toString())
       const r = parseInt(rgb[0]);
       const g = parseInt(rgb[1]);
       const b = parseInt(rgb[2]);
@@ -280,9 +281,9 @@ export struct ColorPickerDemo {
             const touches = event.touches[0];
             this.block2 = Math.max(0.05, Math.min(touches.x / this._width, .95))
             if (event.type == TouchType.Down) {
-               this.getMainColor(touches.x / this._width)
+               this.getMainColor(Math.max(0, Math.min(touches.x / this._width, 1)))
             } else if (event.type == TouchType.Move) {
-               this.getMainColor(touches.x / this._width)
+               this.getMainColor(Math.max(0, Math.min(touches.x / this._width, 1)))
             } else if (event.type == TouchType.Up) {
             }
          })
