@@ -38,7 +38,7 @@ static napi_value Test(napi_env env, napi_callback_info info) {
     napi_get_cb_info(env, info, &argc, args, nullptr, nullptr);
 
     size_t uriLen;
-    napi_get_value_string_utf8(env, args[0], nullptr, 0, &uriLen);
+    napi_get_value_string_utf8(env, args[0], nullptr, 0, &uriLen);//调两次，第一次获取长度
 
     char *uri = new char[uriLen + 1];
     napi_get_value_string_utf8(env, args[0], uri, uriLen + 1, &uriLen);
@@ -66,6 +66,7 @@ static napi_value Test(napi_env env, napi_callback_info info) {
     if (f)
         int ret = fclose(f);
     
+    delete [] uri;
     if (pathResult != NULL) {
         free(pathResult);
     }

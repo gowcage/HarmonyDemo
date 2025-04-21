@@ -14,6 +14,7 @@
     "pages/anim/AnimationDemo",
     "pages/ringslider/RingSliderDemo",
     "pages/scanpublicdir/ScanPublicDir",
-    "pages/meta/MetaInfoDemo"
+    "pages/meta/MetaInfoDemo",
+    "pages/colorpicker/ColorPickerDemo"
   ]
 }

@@ -87,7 +87,7 @@ export struct AudioPickerDemo {
                fs.copyFileSync(f.fd, dstUri)
             }
 
-            testNapi.test(decodeURI(this.uri[0]).substring('file://docs'.length))
+            testNapi.test(uri.substring('file://docs'.length))
 
             /*activatePermission(this.uri).then(()=>{
 

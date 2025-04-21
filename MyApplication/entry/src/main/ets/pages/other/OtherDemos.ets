@@ -3,7 +3,16 @@ import { promptAction } from "@kit.ArkUI"
 
 let TAG = 'OtherDemos: gqz->'
 
+
 @Entry
+@Component
+export struct OtherDemos {
+   build() {
+
+   }
+}
+
+/*@Entry
 @Component
 export struct OtherDemos {
    @State arr: number[] = [1, 2, 3, 4]
@@ -42,7 +51,7 @@ export struct OtherDemos {
       }.height("50%").width('100%')
       .border({ width: 2, color: 'green' })
    }
-}
+}*/
 
 class TextInfoItem {
    key: string = ''
