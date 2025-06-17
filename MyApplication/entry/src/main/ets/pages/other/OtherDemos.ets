@@ -1,5 +1,9 @@
 import { hilog } from "@kit.PerformanceAnalysisKit"
 import { promptAction } from "@kit.ArkUI"
+import { fileIo as fs } from "@kit.CoreFileKit"
+import { copyRawFile } from "../copyfile/CopyDemo"
+import { BusinessError } from "@kit.BasicServicesKit"
+import { ArrayList } from "@kit.ArkTS"
 
 let TAG = 'OtherDemos: gqz->'
 
@@ -7,6 +11,47 @@ let TAG = 'OtherDemos: gqz->'
 @Entry
 @Component
 export struct OtherDemos {
+   private readonly TAG = 'hiby: ***OtherDemos'
+
+   async aboutToAppear(): Promise<void> {
+      let appCtx = getContext(this).getApplicationContext()
+      let rm = appCtx.resourceManager
+      let rawPath = 'index-cn.js'
+
+      let data = getContext(this).resourceManager.getMediaContentSync($r('app.media.startIcon'))
+
+      /*let rawfile = rm.getRawFdSync(rawPath)
+      let destFile = fs.openSync(getContext(this).filesDir + '/index-cn.js',
+         fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE | fs.OpenMode.TRUNC);
+
+      fs.copyFileSync(rawfile.fd, destFile.fd)
+
+      fs.closeSync(destFile)
+      rm.closeRawFdSync(rawPath)*/
+      // 有问题，size不对
+
+      // for (let i = 0; i < 10; i++) {
+      //    copyRawFile(rawPath, getContext(this).filesDir,`index-${i}.js`, rm)
+      //    hilog.debug(0, this.TAG, 'i:' + i)
+      // }
+
+      /*copyRawFile(rawPath, getContext(this).filesDir, `index.js`, rm)
+      try {
+         fs.mkdirSync(getContext(this).filesDir + '/test', true)
+      } catch (e) {
+         hilog.error(0, this.TAG, '' + JSON.stringify(e))
+      }
+      fs.copyFileSync(getContext(this).filesDir + '/index.js', getContext(this).filesDir + '/test/index.js')*/
+
+      hilog.debug(0, this.TAG, 'over')
+   }
+
+   promise3(): Promise<string> {
+      return new Promise((resolve, reject) => {
+         resolve('333')
+      })
+   }
+
    build() {
 
    }

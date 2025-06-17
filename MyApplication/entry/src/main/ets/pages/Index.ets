@@ -6,10 +6,12 @@ import { AudioPickerDemo } from './audiopicker/AudioPickerDemo';
 import { abilityAccessCtrl, common, Permissions } from '@kit.AbilityKit';
 import { BusinessError, deviceInfo } from '@kit.BasicServicesKit';
 
-const permissions: Array<Permissions> = ['ohos.permission.READ_MEDIA', 'ohos.permission.FILE_ACCESS_PERSIST'];
+const permissions: Array<Permissions> =
+   ['ohos.permission.READ_MEDIA', 'ohos.permission.FILE_ACCESS_PERSIST'];
 
 // 使用UIExtensionAbility：将common.UIAbilityContext 替换为common.UIExtensionContext
-function reqPermissionsFromUser(permissions: Array<Permissions>, context: common.UIAbilityContext): void {
+function reqPermissionsFromUser(permissions: Array<Permissions>,
+   context: common.UIAbilityContext): void {
    let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
    // requestPermissionsFromUser会判断权限的授权状态来决定是否唤起弹窗
    atManager.requestPermissionsFromUser(context, permissions).then((data) => {
@@ -35,9 +37,11 @@ function reqPermissionsFromUser(permissions: Array<Permissions>, context: common
 struct Index {
    TAG = 'Index: hiby->'
    private arr: string[] =
-      ['tabs/TabsDemo', 'tabs/TabsDemo2', 'tabs/gesture/TabsDemo3', 'state/StateDemo2', 'audiopicker/AudioPickerDemo',
-         'sidebar/SideBarDemo', 'other/OtherDemos', 'drag/DragDemo', 'nodecontroller/NodeControllerDemo',
-         'anim/AnimationDemo', 'ringslider/RingSliderDemo', 'scanpublicdir/ScanPublicDir', 'meta/MetaInfoDemo', 'colorpicker/ColorPickerDemo']
+      ['tabs/TabsDemo', 'tabs/TabsDemo2', 'tabs/gesture/TabsDemo3', 'state/StateDemo2',
+         'audiopicker/AudioPickerDemo', 'sidebar/SideBarDemo', 'other/OtherDemos', 'drag/DragDemo',
+         'nodecontroller/NodeControllerDemo', 'anim/AnimationDemo', 'ringslider/RingSliderDemo',
+         'scanpublicdir/ScanPublicDir', 'meta/MetaInfoDemo', 'colorpicker/ColorPickerDemo',
+         'observed/ObservedDemo', 'subwindow/SubWindowDemo']
 
    aboutToAppear(): void {
       const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;

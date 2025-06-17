@@ -141,7 +141,6 @@ napi_threadsafe_function tsfn;
 #define NUMBER 666
 
 static void CallJs(napi_env env, napi_value js_cb, void *context, void *data) {
-    napi_get_reference_value(env, cbObj, &js_cb);
     napi_value argv;
     napi_create_int32(env, NUMBER, &argv);
     napi_value result = nullptr;
@@ -167,7 +166,6 @@ static napi_value ThreadsTest(napi_env env, napi_callback_info info) {
         status = napi_acquire_threadsafe_function(tsfn);
 //        OH_LOG_INFO(LOG_APP, "thread : %{public}d", status == napi_ok);
         napi_call_threadsafe_function(tsfn, NULL, napi_tsfn_blocking);
-        status = napi_release_threadsafe_function(tsfn, napi_tsfn_release);
     });
     t.detach();
     return NULL;
