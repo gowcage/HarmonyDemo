@@ -28,6 +28,8 @@ export default class EntryAbility extends UIAbility {
     });
 
     AppStorage.setOrCreate('sandBoxPath',this.context.filesDir)
+    // 给Index页面传递windowStage
+    AppStorage.setOrCreate('winStage', windowStage);
   }
 
   onWindowStageDestroy(): void {

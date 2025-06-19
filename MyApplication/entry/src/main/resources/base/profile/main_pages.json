@@ -17,6 +17,7 @@
     "pages/meta/MetaInfoDemo",
     "pages/colorpicker/ColorPickerDemo",
     "pages/observed/ObservedDemo",
-    "pages/subwindow/SubWindowDemo"
+    "pages/subwindow/SubWindowDemo",
+    "pages/subwindow/SubWin"
   ]
 }
