@@ -1,49 +1,63 @@
-import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
+import {
+   AbilityConstant,
+   ConfigurationConstant,
+   EnvironmentCallback,
+   UIAbility,
+   Want
+} from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
+import { GlobalContext, MimeTypeDetector } from '@ohos/mail';
+import { BusinessError } from '@kit.BasicServicesKit';
 
 const DOMAIN = 0x0000;
 
 export default class EntryAbility extends UIAbility {
+   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+      this.context.getApplicationContext()
+         .setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
+      hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onCreate');
+   }
 
-  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
-    this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
-    hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onCreate');
-  }
+   onDestroy(): void {
+      hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onDestroy');
+   }
 
-  onDestroy(): void {
-    hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onDestroy');
-  }
+   onWindowStageCreate(windowStage: window.WindowStage): void {
+      // Main window is created, set main page for this ability
+      hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
 
-  onWindowStageCreate(windowStage: window.WindowStage): void {
-    // Main window is created, set main page for this ability
-    hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
+      windowStage.loadContent('pages/Index', (err) => {
+         if (err.code) {
+            hilog.error(DOMAIN, 'testTag', 'Failed to load the content. Cause: %{public}s',
+               JSON.stringify(err));
+            return;
+         }
+         hilog.info(DOMAIN, 'testTag', 'Succeeded in loading the content.');
+      });
 
-    windowStage.loadContent('pages/Index', (err) => {
-      if (err.code) {
-        hilog.error(DOMAIN, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err));
-        return;
-      }
-      hilog.info(DOMAIN, 'testTag', 'Succeeded in loading the content.');
-    });
+      AppStorage.setOrCreate('sandBoxPath', this.context.filesDir)
+      // 给Index页面传递windowStage
+      AppStorage.setOrCreate('winStage', windowStage);
 
-    AppStorage.setOrCreate('sandBoxPath',this.context.filesDir)
-    // 给Index页面传递windowStage
-    AppStorage.setOrCreate('winStage', windowStage);
-  }
+      GlobalContext.getContext().setValue("context", this.context);
+      MimeTypeDetector.init((data: object) => {
+         GlobalContext.getContext().setValue("cacheContent", data);
+      })
+   }
 
-  onWindowStageDestroy(): void {
-    // Main window is destroyed, release UI related resources
-    hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onWindowStageDestroy');
-  }
+   onWindowStageDestroy(): void {
+      // Main window is destroyed, release UI related resources
+      hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onWindowStageDestroy');
+   }
 
-  onForeground(): void {
-    // Ability has brought to foreground
-    hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onForeground');
-  }
+   onForeground(): void {
+      // Ability has brought to foreground
+      hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onForeground');
+   }
 
-  onBackground(): void {
-    // Ability has back to background
-    hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onBackground');
-  }
+   onBackground(): void {
+      // Ability has back to background
+      hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onBackground');
+   }
 }

@@ -18,6 +18,8 @@
     "pages/colorpicker/ColorPickerDemo",
     "pages/observed/ObservedDemo",
     "pages/subwindow/SubWindowDemo",
-    "pages/subwindow/SubWin"
+    "pages/subwindow/SubWin",
+    "pages/email/EmailDemo",
+    "pages/color/RevColorDemo"
   ]
 }

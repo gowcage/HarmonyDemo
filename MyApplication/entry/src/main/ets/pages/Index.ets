@@ -36,12 +36,18 @@ function reqPermissionsFromUser(permissions: Array<Permissions>,
 @Component
 struct Index {
    TAG = 'Index: hiby->'
+   /*
+    * 创建新页面的步骤：
+    * 1.创建新的ArkTS文件，例如：TabsDemo2
+    * 2.在arr中添加新的页面路径，例如：'tabs/TabsDemo2',
+    * 3.在main_pages.json中添加新的页面路径，例如：'pages/tabs/TabsDemo2',
+    * */
    private arr: string[] =
       ['tabs/TabsDemo', 'tabs/TabsDemo2', 'tabs/gesture/TabsDemo3', 'state/StateDemo2',
          'audiopicker/AudioPickerDemo', 'sidebar/SideBarDemo', 'other/OtherDemos', 'drag/DragDemo',
          'nodecontroller/NodeControllerDemo', 'anim/AnimationDemo', 'ringslider/RingSliderDemo',
          'scanpublicdir/ScanPublicDir', 'meta/MetaInfoDemo', 'colorpicker/ColorPickerDemo',
-         'observed/ObservedDemo', 'subwindow/SubWindowDemo']
+         'observed/ObservedDemo', 'subwindow/SubWindowDemo', 'email/EmailDemo', 'color/RevColorDemo']
 
    aboutToAppear(): void {
       const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
